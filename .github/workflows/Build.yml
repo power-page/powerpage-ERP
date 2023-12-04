@@ -87,13 +87,13 @@ jobs:
           path: "${{env.RELEASE_PATH}}"
 
       - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: "${{env.RELEASE_PATH}}"
-        asset_path: "${{env.RELEASE_PATH}}"
-        asset_name: "powerpage ERP(Release ${{env.VERSION}})"
-        asset_content_type: application/zip
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: "${{env.RELEASE_PATH}}"
+          asset_path: "${{env.RELEASE_PATH}}"
+          asset_name: "powerpage ERP(Release ${{env.VERSION}})"
+          asset_content_type: application/zip
  
