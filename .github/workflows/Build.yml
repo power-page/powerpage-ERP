@@ -87,13 +87,12 @@ jobs:
           path: "${{env.RELEASE_PATH}}"
 
       - name: Release
-        uses: sondreb/action-release@main
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          commit: "main"
-          token: ${{ secrets.GITHUB_TOKEN }}
-          files: "${{env.RELEASE_PATH}}"
-          draft: true
+          tag_name: ${{env.VERSION}}
+          release_name: "powerpage ERP(Release ${{env.VERSION}})"
+          body: "" 
+          draft: false
           prerelease: false
-          body: ""
-          name: "powerpage ERP(Release ${{env.VERSION}})"
-          tag: ${{env.VERSION}}
