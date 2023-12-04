@@ -41,6 +41,7 @@ jobs:
         with:
           dotnet-version: |
             7.0.x
+          
       - name: Setup Node.js (${{ matrix.node_version }})
         uses: actions/setup-node@v1
         with:
@@ -81,19 +82,26 @@ jobs:
         run: |
           zip -r ${{env.RELEASE_NAME}} ./src/${{env.PROJECT_NAME}}/bin/publish/
 
-      - uses: actions/upload-artifact@v1
+      - name: Upload Release Artifact
+        uses: actions/upload-artifact@v2
         with:
           name: powerpage
           path: "${{env.RELEASE_PATH}}"
 
-      - name: Upload Release Asset
-        id: upload-release-asset 
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         with:
-          upload_url: "${{env.RELEASE_PATH}}"
+          tag_name: ${{ env.VERSION }}
+          release_name: "powerpage ERP(Release ${{env.VERSION}})"
+          draft: true
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: "${{env.RELEASE_PATH}}"
-          asset_name: "powerpage ERP(Release ${{env.VERSION}})"
+          asset_name: "${{env.RELEASE_NAME}}"
           asset_content_type: application/zip
- 
