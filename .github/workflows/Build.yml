@@ -86,14 +86,9 @@ jobs:
           name: powerpage
           path: "${{env.RELEASE_PATH}}"
 
-      - name: Release
-        uses: sondreb/action-release@main
+      - name: Publish
+        uses: softprops/action-gh-release@v1
         with:
-          commit: "main"
-          token: ${{ secrets.GITHUB_TOKEN }}
           files: "${{env.RELEASE_PATH}}"
-          draft: true
-          prerelease: false
-          body: ""
-          name: "powerpage ERP(Release ${{env.VERSION}})"
-          tag: ${{env.VERSION}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
