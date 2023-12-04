@@ -1,4 +1,4 @@
-namespace powerpage.Common.WebToolkit;
+﻿namespace powerpage.Common.WebToolkit;
 
 public static class ServerInfo
 {
@@ -13,10 +13,12 @@ public static class ServerInfo
         return appDataFolderPath;
     }
 
+    private static readonly string[] separator = new[] { "bin" };
+
     public static string GetWwwRootPath()
     {
         return Path.Combine(
-                            AppContext.BaseDirectory.Split(new[] { "bin" }, StringSplitOptions.RemoveEmptyEntries)[0],
+                            AppContext.BaseDirectory.Split(separator, StringSplitOptions.RemoveEmptyEntries)[0],
                             "wwwroot");
     }
 }

@@ -81,6 +81,7 @@ public class DbLogger : ILogger
     {
         try
         {
+#pragma warning disable CA1869 // Cache and reuse 'JsonSerializerOptions' instances
             appLogItem.StateJson = JsonSerializer.Serialize(
                                                             state,
                                                             new JsonSerializerOptions
@@ -89,6 +90,7 @@ public class DbLogger : ILogger
                                                                     JsonIgnoreCondition.WhenWritingNull,
                                                                 WriteIndented = true,
                                                             });
+#pragma warning restore CA1869 // Cache and reuse 'JsonSerializerOptions' instances
         }
         catch
         {
