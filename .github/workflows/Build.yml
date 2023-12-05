@@ -87,12 +87,16 @@ jobs:
         with:
           name: powerpage
           path: "${{env.RELEASE_PATH}}"
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+  
+      - name: Release
+        uses: sondreb/action-release@main
         with:
-          tag_name: ${{ env.VERSION }}
-          release_name: "powerpage ERP(Release ${{env.VERSION}})"
+          commit: "main"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: "${{env.RELEASE_PATH}}"
           draft: true
           prerelease: false
+          body: ""
+          name: "powerpage ERP(Release ${{env.VERSION}})"
+          tag: ${{env.VERSION}}
+ 
